@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言簿</title>
+    <link rel="stylesheet" type="text/css" href="/static/board/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/board/css/board.css"/>
+
+</head>
+<body>
+    <nav class="navbar navbar-default" style="position: relative;">
+        <div>留言簿</div>
+    </nav>
+    <form action="/submit/" method="post" >
+        {% csrf_token %}
+        <h4>请尽情留言吧：</h4>
+        <div class="form-group">
+            姓名<input type="text" name="name" >
+        </div>
+        <div class="form-group">
+            内容<textarea name="content" rows="4" cols="50"></textarea>
+        </div>
+        <button type="submit" class="btn" id="btn">提交</button>
+    </form>
+    <div>
+        <h3>留言历史消息</h3>
+        <ul>
+        {% for board in boards%}
+            <li>
+                <h4>{{board.name}}&nbsp&nbsp留言于({{board.date}})</h4>
+                <h4>{{board.content}}</h4>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+</body>
+    <script type="text/javascript" src="/static/board/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/board/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/board/js/ajax.js"></script>
+</html>
